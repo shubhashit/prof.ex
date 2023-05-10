@@ -3,7 +3,7 @@ import front from '../assets/pictures/front.png'
 import { useRef } from 'react'
 import './Landingpage.css'
 import Internship from './Internship'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider ,signOut } from "firebase/auth";
 import { app } from '../backend/firebase'
 import { AuthContext } from '../context/AuthContext'
 
@@ -33,10 +33,8 @@ export default function LandingPage() {
     // const [user, setUser] = useState(null);
     const { currentUser  } = useContext(AuthContext);
     const{setUser} = useContext(AuthContext);
-    console.log(currentUser)
     useEffect(() => {
         // setUser(localStorage.getItem("user"))
-        console.log(currentUser)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 // console.log(entry)
@@ -65,9 +63,21 @@ export default function LandingPage() {
     function signinwithgoogle(e){
 
     }
+    function signout(e){
+        console.log('sign out')
+       
+
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            // Sign-out successful.
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
 
     function signupwithgoogle(e) {
         e.preventDefault()
+        
         provider.setCustomParameters({
             prompt: "select_account"
         });
@@ -139,6 +149,9 @@ export default function LandingPage() {
                         <span>
                             {currentUser && `${currentUser.displayName}`}
                         </span>
+                        <button onClick={signout}>
+                           {currentUser && 'sign out'}
+                        </button>
                     </div>
                 </div>
                 <div className='flex justify-evenly m-10 ' ref={centerContent}>

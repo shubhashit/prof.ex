@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Test.css'
 import img from '../assets/pictures/online-test2.png'
 import Question from "./Question.1.js"
 import { useNavigate } from 'react-router-dom'
 import Timer from './Timer'
+import { AuthContext } from '../context/AuthContext'
 export default function Test() {
+    const { currentUser } = useContext(AuthContext);
     const [timer, setTimer] = useState(false)
 
     const [score, setscore] = useState(0);
@@ -18,7 +20,8 @@ export default function Test() {
     }
     function onSubmit(e) {
         e.preventDefault();
-        console.log('hellow')
+        console.log(e.target[0].value);
+        console.log(currentUser)
         document.getElementsByClassName('timer')[0].classList.remove('hidden')
         document.getElementById('question-list').classList.remove('hidden');
         document.getElementById('start-test').disabled = true;
@@ -78,7 +81,7 @@ export default function Test() {
 
             <div className="timer hidden" >
                 <div className="timer-display">
-                    {timer && <Timer timer={20} timeUp={() => {
+                    {timer && <Timer timer={600} timeUp={() => {
                         document.getElementById('question-list').classList.add('hidden');
                     }}></Timer>}
                 </div>
