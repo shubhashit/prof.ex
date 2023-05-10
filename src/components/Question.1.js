@@ -71,8 +71,8 @@ export default function Question(props) {
 
                     </div>
                 </div>
-                <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>submit</button>
-                <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>next</button>
+                {/* <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>submit</button>
+                <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>next</button> */}
                 <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8' onClick={handleSubmit}>submit</button>
 
             </div>

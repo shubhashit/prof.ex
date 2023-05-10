@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Test.css'
 import img from '../assets/pictures/online-test2.png'
 import Question from "./Question.1.js"
@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import Timer from './Timer'
 export default function Test() {
     const[timer,setTimer] = useState(false)
+    const setTimerFlase = () => {
+        setTimer(false);
+    }
     const [score, setscore] = useState(0);
     const navigate = useNavigate();
     const handleSubmit = () => {
@@ -21,6 +24,7 @@ export default function Test() {
         document.getElementById('question-list').classList.remove('hidden');
         document.getElementById('start-test').disabled = true;
         setTimer(true);
+        console.log(timer)
     }
     const [inputValue, setInputValue] = useState('');
     const [inputValue2, setInputValue2] = useState('');
@@ -63,7 +67,7 @@ export default function Test() {
                         <input type="text" className="resinput form-control  w-1/2 border-none outline-none " id="examp" placeholder='for ex: 3948392584' value={inputValue3} onChange={handleInputChange3} />
                     </div>
                     <button id='start-test' type='submit' className=' test-button  ml-8' >take test</button>
-                    {/* disabled={!inputValue.trim() || !inputValue2.trim() || !inputValue3.trim() } */}
+                    {/* disabled={!inputValue.trim() || !inputValue2.trim() || !inputValue3.trim() || timer} */}
                 </form>
             </div>
             <div className='mt-4'>
@@ -75,13 +79,8 @@ export default function Test() {
 
             <div className="timer hidden" >
                 <div className="timer-display">
-                    {timer && <Timer timer={600}></Timer>}
+                    {timer && <Timer timer={20} setTimerFlase={setTimerFlase()}></Timer>}
                 </div>
-                {/* <div className="timer-controls">
-                    <button id="start">Start</button>
-                    <button id="pause">Pause</button>
-                    <button id="reset">Reset</button>
-                </div> */}
             </div>
 
             <div className='hidden' id='question-list'>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import front from '../assets/pictures/front.png'
 import { useRef } from 'react'
 import './Landingpage.css'
 import Internship from './Internship'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../backend/firebase'
+import { AuthContext } from '../context/AuthContext'
 
 //animation for main image and heading
 setTimeout(() => {
@@ -29,9 +30,13 @@ setTimeout(() => {
 
 export default function LandingPage() {
     //animation for the redirenction of page
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
+    const { currentUser  } = useContext(AuthContext);
+    const{setUser} = useContext(AuthContext);
+    console.log(currentUser)
     useEffect(() => {
-        setUser(localStorage.getItem("user"))
+        // setUser(localStorage.getItem("user"))
+        console.log(currentUser)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 // console.log(entry)
@@ -49,7 +54,7 @@ export default function LandingPage() {
         t.forEach(element => {
             observer.observe(element);
         });
-    }, [])
+    }, [currentUser])
     // constant and variable
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app);
@@ -58,6 +63,10 @@ export default function LandingPage() {
     let signuppage = false
 
     function signinwithgoogle(e){
+
+    }
+
+    function signupwithgoogle(e) {
         e.preventDefault()
         provider.setCustomParameters({
             prompt: "select_account"
@@ -70,9 +79,10 @@ export default function LandingPage() {
                 // The signed-in user info.
                 const user = result.user;
                 // IdP data available using getAdditionalUserInfo(result)
-                setUser(user);
-                localStorage.setItem("user",user);
-                console.log(user, token);
+                // setUser(user)
+                localStorage.setItem("user", user);
+                console.log(user);
+                console.log(token);
                 r.current.classList.add('hidden');
                 centerContent.current.classList.remove('opacity-50')
                 signuppage = false;
@@ -86,7 +96,7 @@ export default function LandingPage() {
                 const email = error.customData.email;
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
-                console.log(errorCode,errorMessage,email,credential)
+                console.log(errorCode, errorMessage, email, credential)
                 // ...
             });
     }
@@ -124,7 +134,12 @@ export default function LandingPage() {
                         <span className=' text-4xl mr-3 cursor-pointer font-bold'>Prof.ex</span>
                         {/* <span className=' opacity-100 text-2xl ml-4 mr-3 cursor-pointer' onClick={navigateToHome}>Home</span> */}
                     </div>
-                    <input type="text" name="text" className="input" placeholder="Type something here...."></input>
+                    {/* <input type="text" name="text" className="input" placeholder="Type something here...."></input> */}
+                    <div>
+                        <span>
+                            {currentUser && `${currentUser.displayName}`}
+                        </span>
+                    </div>
                 </div>
                 <div className='flex justify-evenly m-10 ' ref={centerContent}>
                     <div className='m-10 text-white p-2 flex flex-col justify-center items-center hide'>
@@ -145,13 +160,13 @@ export default function LandingPage() {
                             <input type="email" className="input" placeholder="Email" />
                             <input type="password" className="input" placeholder="Password" />
                         </div>
-                        <button>Sign up</button>
-                        <button onClick={signinwithgoogle}>Sign up with google</button>
+                        <button onClick={signinwithgoogle}>Sign up</button>
+                        <button onClick={signupwithgoogle}>Sign up with google</button>
                     </form>
                     <div className="form-section">
-                        <p>Have an account? 
+                        <p>Have an account?
                             {/* <a >Log in</a>  */}
-                            </p>
+                        </p>
                     </div>
                 </div>
 
@@ -163,7 +178,7 @@ export default function LandingPage() {
                     </svg>
                 </div>
             </div>
-            {user && <Internship></Internship>}
+            {currentUser && <Internship></Internship>}
             {/* <div className='h-screen'></div> */}
         </div>
     )
