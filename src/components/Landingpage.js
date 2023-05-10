@@ -1,10 +1,11 @@
+import { Timestamp, doc, setDoc, collection, query, where } from "firebase/firestore";
 import React, { useContext, useEffect } from 'react'
 import front from '../assets/pictures/front.png'
 import { useRef } from 'react'
 import './Landingpage.css'
 import Internship from './Internship'
-import { getAuth, signInWithPopup, GoogleAuthProvider ,signOut } from "firebase/auth";
-import { app } from '../backend/firebase'
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
+import { app, db } from '../backend/firebase'
 import { AuthContext } from '../context/AuthContext'
 
 //animation for main image and heading
@@ -27,12 +28,9 @@ setTimeout(() => {
         observer.observe(element);
     });
 }, 100);
-
 export default function LandingPage() {
-    //animation for the redirenction of page
-    // const [user, setUser] = useState(null);
-    const { currentUser  } = useContext(AuthContext);
-    const{setUser} = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
+    // one time animation for the heading text and image on landing page for redirection of page
     useEffect(() => {
         // setUser(localStorage.getItem("user"))
         const observer = new IntersectionObserver((entries) => {
@@ -60,13 +58,8 @@ export default function LandingPage() {
     const centerContent = useRef(null);
     let signuppage = false
 
-    function signinwithgoogle(e){
-
-    }
-    function signout(e){
-        console.log('sign out')
-       
-
+    // normal sign out fuction
+    function signout(e) {
         const auth = getAuth();
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -74,15 +67,15 @@ export default function LandingPage() {
             // An error happened.
         });
     }
-
+    // sign up with google fuctionnality
     function signupwithgoogle(e) {
         e.preventDefault()
-        
+
         provider.setCustomParameters({
             prompt: "select_account"
         });
         signInWithPopup(auth, provider)
-            .then((result) => {
+            .then(async (result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
@@ -93,6 +86,25 @@ export default function LandingPage() {
                 localStorage.setItem("user", user);
                 console.log(user);
                 console.log(token);
+                // Create a reference to the cities collection
+                const citiesRef = collection(db, "users");
+
+                // Create a query against the collection.
+                const q = query(citiesRef, where("email", "==", `${user.email}`));
+                if (!q) {
+                    try {
+
+                        await setDoc(doc(db, "users", `${user.uid}`), {
+                            displayName: user.displayName,
+                            email: user.email,
+                            timeForUserCreation: Timestamp.now(),
+                            uid:user.uid,
+                        });
+                    } catch (e) {
+                        console.error("Error adding document: ", e);
+                    }
+                }
+
                 r.current.classList.add('hidden');
                 centerContent.current.classList.remove('opacity-50')
                 signuppage = false;
@@ -110,18 +122,28 @@ export default function LandingPage() {
                 // ...
             });
     }
-
-    // sign up box animation and fading of background
+    // sign up box animation and fading of background and scrool effect when user is logged in 
     function signupBox() {
-        if (!signuppage) {
-            r.current.classList.remove('hidden');
-            centerContent.current.classList.add('opacity-50')
-            signuppage = true;
+        if (currentUser) {
+            console.log('object')
+            window.scrollTo({
+                top: document.getElementById('internship').offsetTop - 10,
+                left: 0,
+                behavior: 'smooth'
+            });
         }
         else {
-            r.current.classList.add('hidden');
-            centerContent.current.classList.remove('opacity-50')
-            signuppage = false;
+
+            if (!signuppage) {
+                r.current.classList.remove('hidden');
+                centerContent.current.classList.add('opacity-50')
+                signuppage = true;
+            }
+            else {
+                r.current.classList.add('hidden');
+                centerContent.current.classList.remove('opacity-50')
+                signuppage = false;
+            }
         }
     }
     // removing of sign up form
@@ -150,18 +172,17 @@ export default function LandingPage() {
                             {currentUser && `${currentUser.displayName}`}
                         </span>
                         <button onClick={signout}>
-                           {currentUser && 'sign out'}
+                            {currentUser && 'sign out'}
                         </button>
                     </div>
                 </div>
-                <div className='flex justify-evenly m-10 ' ref={centerContent}>
+                <div id="LandingPageContent" className='flex  justify-evenly m-10 ' ref={centerContent}>
                     <div className='m-10 text-white p-2 flex flex-col justify-center items-center hide'>
                         <p className='text-4xl font-bold mb-3'>HEADING</p>
                         <p className='text-xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores sint quam qui numquam suscipit inventore asperiores dignissimos laboriosam explicabo.</p>
-                        <button className='m-4 p-1 get-started-btn' onClick={signupBox}>GET STARTED</button>
+                        <button className='m-4 p-1 get-started-btn' onClick={signupBox} >GET STARTED</button>
                     </div>
                     <img className='front-img inline-block hide' src={front} alt=" " />
-                    {/* <img src={logo} alt=" " className='h-48 w-48' /> */}
 
                 </div>
                 <div className="form-box signUpForm hidden" ref={r}>
@@ -173,7 +194,7 @@ export default function LandingPage() {
                             <input type="email" className="input" placeholder="Email" />
                             <input type="password" className="input" placeholder="Password" />
                         </div>
-                        <button onClick={signinwithgoogle}>Sign up</button>
+                        <button>Sign up</button>
                         <button onClick={signupwithgoogle}>Sign up with google</button>
                     </form>
                     <div className="form-section">

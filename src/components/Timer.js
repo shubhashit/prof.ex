@@ -4,7 +4,7 @@ export default function Timer(props) {
     console.log(props.timer)
     const [timeLeft, setTimeLeft] = useState(props.timer);
     useEffect(() => {
-        if(timeLeft == 0){
+        if (timeLeft === 0) {
             console.log('this is check')
             document.getElementById('timercomponent').classList.add('hidden');
             // props.setTimerFalse();
@@ -17,7 +17,7 @@ export default function Timer(props) {
 
     return (
         <div id='timercomponent'>
-            {timeLeft && <h2>{parseInt(timeLeft/60)} <span>:</span> {timeLeft%60 > 10 ? timeLeft%60 : `0${timeLeft%60}`}</h2>}
+            {timeLeft && <h2>{parseInt(timeLeft / 60)} <span>:</span> {timeLeft % 60 > 10 ? timeLeft % 60 : `0${timeLeft % 60}`}</h2>}
         </div>
     );
 }

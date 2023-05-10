@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Test.css'
 import img from '../assets/pictures/online-test2.png'
 import Question from "./Question.1.js"

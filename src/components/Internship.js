@@ -120,7 +120,7 @@ export default function Internship() {
   }, [])
   
   return (
-    <div className='mainI'>
+    <div id='internship' className='mainI'>
 
       <div className='flex justify-evenly m-10 mt-0 overflow-hidden' >
         <img className='front-img inline-block mt-3 left' src={front} alt=" " />

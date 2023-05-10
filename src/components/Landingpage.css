@@ -186,3 +186,21 @@
         0 0 0 2px rgb(190, 190, 190),
         0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
+
+@media screen and (max-width: 600px) {
+                #LandingPageContent{
+                    flex-direction: column-reverse;
+                    margin: 3px;
+                    padding: 0;
+                }
+                .front-img{
+                    height: 270px;
+                    width: 320px;
+                    margin: auto;
+                }
+                #LandingPageContent > div{
+                    margin-top: 5px;
+                    margin: 0;
+                    z-index: 10;
+                }
+}
