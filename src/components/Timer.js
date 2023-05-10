@@ -5,8 +5,10 @@ export default function Timer(props) {
     const [timeLeft, setTimeLeft] = useState(props.timer);
     useEffect(() => {
         if(timeLeft == 0){
+            console.log('this is check')
             document.getElementById('timercomponent').classList.add('hidden');
-            props.setTimerFalse();
+            // props.setTimerFalse();
+            props.timeUp();
         }
         const timer =
             timeLeft > 0 && setInterval(() => setTimeLeft(timeLeft - 1), 1000);

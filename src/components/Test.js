@@ -5,10 +5,8 @@ import Question from "./Question.1.js"
 import { useNavigate } from 'react-router-dom'
 import Timer from './Timer'
 export default function Test() {
-    const[timer,setTimer] = useState(false)
-    const setTimerFlase = () => {
-        setTimer(false);
-    }
+    const [timer, setTimer] = useState(false)
+
     const [score, setscore] = useState(0);
     const navigate = useNavigate();
     const handleSubmit = () => {
@@ -20,10 +18,11 @@ export default function Test() {
     }
     function onSubmit(e) {
         e.preventDefault();
+        console.log('hellow')
         document.getElementsByClassName('timer')[0].classList.remove('hidden')
         document.getElementById('question-list').classList.remove('hidden');
         document.getElementById('start-test').disabled = true;
-        setTimer(true);
+        setTimer(true)
         console.log(timer)
     }
     const [inputValue, setInputValue] = useState('');
@@ -46,7 +45,7 @@ export default function Test() {
     return (
         <div className='testPage'>
             <form onSubmit={navigateToTest2} className="">
-                <button  type='submit' className=' next-button absolute right-0 mr-3 top-2 mt-0' disabled>next test</button>
+                <button type='submit' className=' next-button absolute right-0 mr-3 top-2 mt-0' disabled>next test</button>
             </form>
             <div className=' h-fit flex flex-col justify-start '>
                 <div className='flex justify-between'>
@@ -79,7 +78,9 @@ export default function Test() {
 
             <div className="timer hidden" >
                 <div className="timer-display">
-                    {timer && <Timer timer={20} setTimerFlase={setTimerFlase()}></Timer>}
+                    {timer && <Timer timer={20} timeUp={() => {
+                        document.getElementById('question-list').classList.add('hidden');
+                    }}></Timer>}
                 </div>
             </div>
 
