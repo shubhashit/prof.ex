@@ -5,6 +5,8 @@ import Question from "./Question.1.js"
 import { useNavigate } from 'react-router-dom'
 import Timer from './Timer'
 import { AuthContext } from '../context/AuthContext'
+import { Timestamp, addDoc, collection} from 'firebase/firestore'
+import { db } from '../backend/firebase'
 export default function Test() {
     const { currentUser } = useContext(AuthContext);
     const [timer, setTimer] = useState(false)
@@ -18,14 +20,30 @@ export default function Test() {
         setscore(x);
         console.log(x);
     }
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
         console.log(e.target[0].value);
-        console.log(currentUser)
-        document.getElementsByClassName('timer')[0].classList.remove('hidden')
-        document.getElementById('question-list').classList.remove('hidden');
-        document.getElementById('start-test').disabled = true;
-        setTimer(true)
+        // let name = e.target[0].value;
+        let email = e.target[1].value;
+        // let number = e.target[2].value;
+        if(email === currentUser.email){
+            console.log(currentUser.uid)
+            try {
+
+
+                const docref = await addDoc(collection(db, "users", `${currentUser.uid}` ,"testsTaken"), {
+                    companyName : 'presentconpany',
+                    startTime: Timestamp.now(),
+                });
+                console.log(docref.id)
+                document.getElementsByClassName('timer')[0].classList.remove('hidden')
+                document.getElementById('question-list').classList.remove('hidden');
+                document.getElementById('start-test').disabled = true;
+                setTimer(true)
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
         console.log(timer)
     }
     const [inputValue, setInputValue] = useState('');
