@@ -22,7 +22,7 @@ export default function CompanyIntershipPage() {
       </div>
       <div className='m-10 text-white p-2  flex-col justify-center items-center z-30 hidden'>
         <p className='text-xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores sint quam qui numquam suscipit inventore asperiores dignissimos laboriosam explicabo.</p>
-        <button className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
+        <button className='taketestCompanypage m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
       </div>
 
 

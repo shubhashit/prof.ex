@@ -8,9 +8,12 @@
     #company {
         flex-direction: row-reverse;
     }
-    #company > div:first-child > p:nth-child(2) , button:nth-child(3){
+    #company > div:first-child > p:nth-child(2) {
         display: none;
 
+    }
+    .taketestCompanypage{
+        display: none;
     }
     #company + div {
         display: flex;

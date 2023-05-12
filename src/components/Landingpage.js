@@ -181,7 +181,7 @@ export default function LandingPage() {
                     <div className='m-10 text-white p-2 flex flex-col justify-center items-center hide'>
                         <p className='text-4xl font-bold mb-3'>HEADING</p>
                         <p className='text-xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores sint quam qui numquam suscipit inventore asperiores dignissimos laboriosam explicabo.</p>
-                        <button className='m-4 p-1 get-started-btn' onClick={signupBox} >GET STARTED</button>
+                        <button className='m-4 p-1 get-started-btn z-10' onClick={signupBox} >GET STARTED</button>
                     </div>
                     <img className='front-img inline-block hide' src={front} alt=" " />
 

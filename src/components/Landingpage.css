@@ -20,6 +20,7 @@
     line-height: 0;
     transform: rotate(180deg);
 }
+
 .inverse {
     position: absolute;
     left: 0;
@@ -188,19 +189,26 @@
 }
 
 @media screen and (max-width: 600px) {
-                #LandingPageContent{
-                    flex-direction: column-reverse;
-                    margin: 3px;
-                    padding: 0;
-                }
-                .front-img{
-                    height: 270px;
-                    width: 320px;
-                    margin: auto;
-                }
-                #LandingPageContent > div{
-                    margin-top: 5px;
-                    margin: 0;
-                    z-index: 10;
-                }
+    #LandingPageContent {
+        flex-direction: column-reverse;
+        margin: 3px;
+        padding: 0;
+    }
+
+    .front-img {
+        height: 270px;
+        width: 320px;
+        margin: auto;
+    }
+
+    #LandingPageContent>div {
+        margin-top: 5px;
+        margin: 0;
+        z-index: 10;
+    }
+}
+@media screen and (max-height: 600px) {
+    .custom-shape-divider-bottom-1677075985{
+        display: none;
+    }
 }
