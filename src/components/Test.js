@@ -70,10 +70,10 @@ export default function Test() {
             </form>
             <div className=' h-fit flex flex-col justify-start '>
                 <div className='flex justify-between'>
-                    <p className='inline-block text-7xl font-bold text-start ml-8 mt-8 items-center'>Points before you <br></br> begin</p>
+                    <p className='inline-block text-7xl font-bold text-start ml-8 mt-8 items-center PointsBeforeYouBegin'>Points before you <br></br> begin</p>
                     <img className='test-img' src={img} alt="" />
                 </div>
-                <form onSubmit={onSubmit} className="m-auto  p-3 w-1/2">
+                <form id='testDetails' onSubmit={onSubmit} className="m-auto  p-3 w-1/2">
                     <div className=' p-2  flex '>
                         <label htmlFor="exampleInputEmail1" className="form-label" style={{ "width": "20vw" }}>Name :</label>
                         <input type="text" className="resinput form-control w-1/2 border-none outline-none  " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Vedant Sign' value={inputValue} onChange={handleInputChange} />

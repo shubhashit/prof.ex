@@ -1,0 +1,25 @@
+@media screen and (max-width: 1000px) {
+    .front-img {
+        height: 40vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #company {
+        flex-direction: row-reverse;
+    }
+    #company > div:first-child > p:nth-child(2) , button:nth-child(3){
+        display: none;
+
+    }
+    #company + div {
+        display: flex;
+    }
+}
+@media screen and (max-width: 500px) {
+    #company + div {
+        display: flex;
+        margin: 5px;
+        margin-top: 50px;
+    }
+}

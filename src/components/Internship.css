@@ -221,8 +221,37 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
 @media screen and (max-width: 450px) {
     .internmain {
         grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #internship>div {
+        margin: 0;
+    }
+
+    #internship>div:first-child>div {
+        margin: 0;
+    }
+    #internship>div>img {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #internship>div {
+        margin: 0;
+        flex-direction: column;
+    }
+
+    #internship>div>img {
+        display: none;
+    }
+
+    .internmain {
+        justify-items: center;
     }
 }

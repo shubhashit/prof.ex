@@ -1,44 +1,33 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../components/CompanyintershipPage.css'
 import front from '../assets/pictures/front.png'
 
 
 export default function CompanyIntershipPage() {
   const navigate = useNavigate()
-  function NavigateToTestPage(){
+  function NavigateToTestPage() {
     navigate('/internship/companyname/test')
   }
   return (
     <div className='w-screen h-screen main'>
-      
-      <div className='flex justify-evenly pt-20 ' >
+      <div id='company' className='flex justify-evenly pt-20 ' >
         <div className='m-10 text-white p-2 flex flex-col justify-center items-center z-30'>
           <p className='text-4xl font-bold mb-3'>Company Name</p>
           <p className='text-xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores sint quam qui numquam suscipit inventore asperiores dignissimos laboriosam explicabo.</p>
-          <button className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
+          <button  className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
         </div>
-        <img className='front-img inline-block' src={front} alt=" " />
+        <img className='front-img inline-block z-10' src={front} alt=" " />
         {/* <img src={logo} alt=" " className='h-48 w-48' /> */}
+      </div>
+      <div className='m-10 text-white p-2  flex-col justify-center items-center z-30 hidden'>
+        <p className='text-xl'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores sint quam qui numquam suscipit inventore asperiores dignissimos laboriosam explicabo.</p>
+        <button className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
+      </div>
 
-      </div>
-      <div className="form-box signUpForm hidden" >
-        <form className="form">
-          <span className="title">Sign up</span>
-          <span className="subtitle">Create a free account with your email.</span>
-          <div className="form-container">
-            <input type="text" className="input" placeholder="Full Name" />
-            <input type="email" className="input" placeholder="Email" />
-            <input type="password" className="input" placeholder="Password" />
-          </div>
-          <button>Sign up</button>
-          <button>Sign up with google</button>
-        </form>
-        <div className="form-section">
-          <p>Have an account?
-            {/* <a >Log in</a>  */}
-          </p>
-        </div>
-      </div>
+
+
+
 
       <div className="custom-shape-divider-bottom-1677075985 inverse">
         <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

@@ -6,12 +6,12 @@ import Qimg from '../assets/pictures/question.png'
 export default function Question(props) {
     // const correctOpction  = '1';
     const [selectedOption, setSelectedOption] = useState(null);
-    const handleSubmit = (e)=>{
+    const correctOpction = 'option1'
+    const Submit = (e)=>{
         console.log('handle')
-        // if(correctOpction === selectedOption){
+        if(correctOpction === selectedOption){
             props.handleSubmit();
-        // }
-        console.log(e.target.disabled)
+        }
         e.target.disabled = true;
 
     }
@@ -21,7 +21,7 @@ export default function Question(props) {
     };
     return (
         <div className='flex justify-center mt-6'>
-            <div className='border border-black question-box p-4'>
+            <div className='border border-black question-box p-4 m-2'>
                 <div className='flex  items-center'>
                     <img className='w-20' src={Qimg} alt="" />
                     <p className='text-start text-xl'>Question 1 of 10</p>
@@ -73,7 +73,7 @@ export default function Question(props) {
                 </div>
                 {/* <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>submit</button>
                 <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8'>next</button> */}
-                <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8' onClick={handleSubmit}>submit</button>
+                <button disabled={!selectedOption} type='submit' className=' test-button border border-black ml-8' onClick={Submit}>submit</button>
 
             </div>
         </div>
