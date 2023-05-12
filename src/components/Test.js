@@ -46,19 +46,6 @@ export default function Test() {
         }
         console.log(timer)
     }
-    const [inputValue, setInputValue] = useState('');
-    const [inputValue2, setInputValue2] = useState('');
-    const [inputValue3, setInputValue3] = useState('');
-
-    function handleInputChange(event) {
-        setInputValue(event.target.value);
-    }
-    function handleInputChange2(event) {
-        setInputValue2(event.target.value);
-    }
-    function handleInputChange3(event) {
-        setInputValue3(event.target.value);
-    }
     function navigateToTest2() {
         console.log('nexttest')
         navigate('/internship/companyname/test2')
@@ -76,15 +63,15 @@ export default function Test() {
                 <form id='testDetails' onSubmit={onSubmit} className="m-auto  p-3 w-1/2">
                     <div className=' p-2  flex '>
                         <label htmlFor="exampleInputEmail1" className="form-label" style={{ "width": "20vw" }}>Name :</label>
-                        <input type="text" className="resinput form-control w-1/2 border-none outline-none  " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Vedant Sign' value={inputValue} onChange={handleInputChange} />
+                        <input type="text" className="resinput form-control w-1/2 border-none outline-none  " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder='Vedant Sign'  />
                     </div>
                     <div className="p-2 resinputdiv flex">
                         <label htmlFor="exampleInputPassword1" className="form-label" style={{ "width": "20vw" }}>Email :</label>
-                        <input type="email" className="resinput form-control  w-1/2 border-none outline-none " id="exampleInputPassword1" placeholder='vedant@example.com' value={inputValue2} onChange={handleInputChange2} />
+                        <input type="email" className="resinput form-control  w-1/2 border-none outline-none " id="exampleInputPassword1" placeholder='vedant@example.com'  />
                     </div>
                     <div className="p-2 resinputdiv flex">
                         <label htmlFor="exampleInputPassword1" className="form-label" style={{ "width": "20vw" }}>Phone Number :</label>
-                        <input type="text" className="resinput form-control  w-1/2 border-none outline-none " id="examp" placeholder='for ex: 3948392584' value={inputValue3} onChange={handleInputChange3} />
+                        <input type="text" className="resinput form-control  w-1/2 border-none outline-none " id="examp" placeholder='for ex: 3948392584'  />
                     </div>
                     <button id='start-test' type='submit' className=' test-button  ml-8' >take test</button>
                     {/* disabled={!inputValue.trim() || !inputValue2.trim() || !inputValue3.trim() || timer} */}
