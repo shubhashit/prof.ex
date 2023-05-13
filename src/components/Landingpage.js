@@ -1,4 +1,4 @@
-import { Timestamp, doc, setDoc, collection, query, where } from "firebase/firestore";
+import { Timestamp, doc, setDoc, collection, query, where, getDoc, getDocs } from "firebase/firestore";
 import React, { useContext, useEffect } from 'react'
 import front from '../assets/pictures/front.png'
 import waveres from '../assets/pictures/wave-res.png'
@@ -75,54 +75,64 @@ export default function LandingPage() {
         provider.setCustomParameters({
             prompt: "select_account"
         });
-        const result =  await signInWithPopup(auth, provider)
-            // .then(async (result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                // IdP data available using getAdditionalUserInfo(result)
-                // setUser(user)
-                localStorage.setItem("user", user);
-                console.log(user);
-                console.log(token);
-                // Create a reference to the cities collection
-                const citiesRef = collection(db, "users");
+        const result = await signInWithPopup(auth, provider)
+        // .then(async (result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // setUser(user)
+        localStorage.setItem("user", user);
+        console.log(user);
+        console.log(token);
+        // Create a reference to the cities collection
+        const citiesRef = collection(db, "users");
 
-                // Create a query against the collection.
-                const q = query(citiesRef, where("email", "==", `${user.email}`));
-                if (!q) {
-                    try {
+        // Create a query against the collection.
+        const q = query(citiesRef, user.uid);
+        const querySnapshot = await getDocs(q); 
+        console.log(q);
+        console.log(querySnapshot);
+        var check = 0 ;
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            check ++;
+        });
+        if (!check) {
+            try {
 
-                        await setDoc(doc(db, "users", `${user.uid}`), {
-                            displayName: user.displayName,
-                            email: user.email,
-                            timeForUserCreation: Timestamp.now(),
-                            uid: user.uid,
-                        });
-                    } catch (e) {
-                        console.error("Error adding document: ", e);
-                    }
-                }
+                await setDoc(doc(db, "users", `${user.uid}`), {
+                    displayName: user.displayName,
+                    email: user.email,
+                    timeForUserCreation: Timestamp.now(),
+                    uid: user.uid,
+                });
+                console.log('in try block')
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
 
-                r.current.classList.add('hidden');
-                centerContent.current.classList.remove('opacity-50')
-                signuppage = false;
+        r.current.classList.add('hidden');
+        centerContent.current.classList.remove('opacity-50')
+        signuppage = false;
 
-                // ...
-            // })
-            // .catch((error) => {
-            //     // Handle Errors here.
-            //     const errorCode = error.code;
-            //     const errorMessage = error.message;
-            //     // The email of the user's account used.
-            //     const email = error.customData.email;
-            //     // The AuthCredential type that was used.
-            //     const credential = GoogleAuthProvider.credentialFromError(error);
-            //     console.log(errorCode, errorMessage, email, credential)
-            //     // ...
-            // });
+        // ...
+        // })
+        // .catch((error) => {
+        //     // Handle Errors here.
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+        //     // The email of the user's account used.
+        //     const email = error.customData.email;
+        //     // The AuthCredential type that was used.
+        //     const credential = GoogleAuthProvider.credentialFromError(error);
+        //     console.log(errorCode, errorMessage, email, credential)
+        //     // ...
+        // });
     }
     // sign up box animation and fading of background and scrool effect when user is logged in 
     function signupBox() {
@@ -169,13 +179,13 @@ export default function LandingPage() {
                         {/* <span className=' opacity-100 text-2xl ml-4 mr-3 cursor-pointer' onClick={navigateToHome}>Home</span> */}
                     </div>
                     {/* <input type="text" name="text" className="input" placeholder="Type something here...."></input> */}
-                    <div>
+                    <div className="flex flex-col mr-2">
+                        <button onClick={signout}>
+                            {currentUser && <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>}
+                        </button>
                         <span>
                             {currentUser && `${currentUser.displayName}`}
                         </span>
-                        <button onClick={signout}>
-                            {currentUser && 'sign out'}
-                        </button>
                     </div>
                 </div>
                 <div id="LandingPageContent" className='flex  justify-evenly m-10 ' ref={centerContent}>

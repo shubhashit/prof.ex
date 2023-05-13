@@ -97,6 +97,12 @@ export default function Test() {
                 <Question handleSubmit={handleSubmit}></Question>
                 <Question handleSubmit={handleSubmit}></Question>
                 <Question handleSubmit={handleSubmit}></Question>
+                <div>
+                    <button  type='submit' className=' test-button border border-black ml-8' onClick={()=>{
+                        document.getElementById('timercomponent').classList.add('hidden');
+                        document.getElementById('question-list').classList.add('hidden');
+                    }}>submit test</button>
+                </div>
                 <div>{score}</div>
             </div>
         </div>

@@ -190,6 +190,7 @@
 
 @media screen and (max-width: 600px) {
     #LandingPageContent {
+        margin-top: 100px;
         flex-direction: column-reverse;
         margin: 3px;
         padding: 0;

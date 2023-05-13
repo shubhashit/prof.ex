@@ -6,6 +6,7 @@ import Qimg from '../assets/pictures/question.png'
 export default function Question(props) {
     // const correctOpction  = '1';
     const [selectedOption, setSelectedOption] = useState(null);
+    const [clicked,setclicked] = useState(false);
     const correctOpction = 'option1'
     const Submit = (e)=>{
         console.log('handle')
@@ -13,6 +14,7 @@ export default function Question(props) {
             props.handleSubmit();
         }
         e.target.disabled = true;
+        setclicked(true);
 
     }
     const handleOptionChange=(event) => {
@@ -37,7 +39,8 @@ export default function Question(props) {
                             type="radio"
                             value="option1"
                             checked={selectedOption === "option1"}
-                            onChange={handleOptionChange} />
+                            onChange={handleOptionChange} 
+                            disabled = {clicked}/>
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option2">
@@ -47,7 +50,8 @@ export default function Question(props) {
                             type="radio"
                             value="option2"
                             checked={selectedOption === "option2"}
-                            onChange={handleOptionChange} />
+                            onChange={handleOptionChange}
+                            disabled={clicked} />
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option3">
@@ -57,7 +61,8 @@ export default function Question(props) {
                             type="radio"
                             value="option3"
                             checked={selectedOption === "option3"}
-                            onChange={handleOptionChange} />
+                            onChange={handleOptionChange}
+                            disabled={clicked} />
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option4">
@@ -67,7 +72,8 @@ export default function Question(props) {
                             type="radio"
                             value="option4"
                             checked={selectedOption === "option4"}
-                            onChange={handleOptionChange} />
+                            onChange={handleOptionChange}
+                            disabled={clicked} />
 
                     </div>
                 </div>

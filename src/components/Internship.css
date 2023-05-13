@@ -39,7 +39,7 @@
 
 
 .blobStyle {
-    width: 20vh;
+    width: 21vh;
 }
 
 .hide {
@@ -208,17 +208,29 @@
     .internmain {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+
+    .blobStyle {
+        width: 20vh;
+    }
 }
 
 @media screen and (max-width: 900px) {
     .internmain {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
+
+    .blobStyle {
+        width: 19vh;
+    }
 }
 
 @media screen and (max-width: 600px) {
     .internmain {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .blobStyle {
+        width: 17vh;
     }
 }
 
@@ -236,6 +248,7 @@
     #internship>div:first-child>div {
         margin: 0;
     }
+
     #internship>div>img {
         margin: auto;
     }
