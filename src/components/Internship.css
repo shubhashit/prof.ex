@@ -268,3 +268,9 @@
         justify-items: center;
     }
 }
+
+@media screen and (max-height: 700px) {
+    .blobStyle {
+            width: 9rem;
+        }
+}

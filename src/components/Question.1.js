@@ -5,9 +5,10 @@ import Qimg from '../assets/pictures/question.png'
 
 export default function Question(props) {
     // const correctOpction  = '1';
+    
     const [selectedOption, setSelectedOption] = useState(null);
     const [clicked,setclicked] = useState(false);
-    const correctOpction = 'option1'
+    const correctOpction = `option${props.data[5]}`
     const Submit = (e)=>{
         console.log('handle')
         if(correctOpction === selectedOption){
@@ -18,6 +19,7 @@ export default function Question(props) {
 
     }
     const handleOptionChange=(event) => {
+        console.log(props.data[0])
         console.log(event.target.value)
         setSelectedOption(event.target.value);
     };
@@ -26,14 +28,14 @@ export default function Question(props) {
             <div className='border border-black question-box p-4 m-2'>
                 <div className='flex  items-center'>
                     <img className='w-20' src={Qimg} alt="" />
-                    <p className='text-start text-xl'>Question 1 of 10</p>
+                    <p className='text-start text-xl'>{`Question ${props.num + 1} of 10`}</p>
                 </div>
                 <div className='mt-2'>
-                    Q1. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur alias nam reprehenderit dolores.
+                    {`Q${props.num + 1}. ${props.data[0]}`}
                 </div>
                 <div className='mt-4'>
                     <div className='m-2 border flex items-center justify-center ' key="option1">
-                        <label className='mr-2'>option1</label>
+                        <label className='mr-2'>{`${props.data[1]}`}</label>
                         <input
                             className='mr-2'
                             type="radio"
@@ -44,7 +46,7 @@ export default function Question(props) {
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option2">
-                        <label className='mr-2'>option2</label>
+                        <label className='mr-2'>{`${props.data[2]}`}</label>
                         <input
                             className='mr-2'
                             type="radio"
@@ -55,7 +57,7 @@ export default function Question(props) {
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option3">
-                        <label className='mr-2'>option3</label>
+                        <label className='mr-2'>{`${props.data[3]}`}</label>
                         <input
                             className='mr-2'
                             type="radio"
@@ -66,7 +68,7 @@ export default function Question(props) {
 
                     </div>
                     <div className='m-2 border flex items-center justify-center ' key="option4">
-                        <label className='mr-2'>option4</label>
+                        <label className='mr-2'>{`${props.data[4]}`}</label>
                         <input
                             className='mr-2'
                             type="radio"

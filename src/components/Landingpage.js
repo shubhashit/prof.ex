@@ -1,13 +1,13 @@
-import { Timestamp, doc, setDoc, collection, query, where, getDoc, getDocs } from "firebase/firestore";
+import { Timestamp, doc, setDoc, collection, query, getDocs } from "firebase/firestore";
 import React, { useContext, useEffect } from 'react'
 import front from '../assets/pictures/front.png'
-import waveres from '../assets/pictures/wave-res.png'
 import { useRef } from 'react'
 import './Landingpage.css'
 import Internship from './Internship'
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { app, db } from '../backend/firebase'
 import { AuthContext } from '../context/AuthContext'
+import Footer from "./Footer";
 
 //animation for main image and heading
 setTimeout(() => {
@@ -95,13 +95,17 @@ export default function LandingPage() {
         const querySnapshot = await getDocs(q); 
         console.log(q);
         console.log(querySnapshot);
-        var check = 0 ;
+        var check = true ;
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            check ++;
+            if(doc.id === user.uid){
+                console.log('in the if block check == flase')
+                check = false;
+            }
+            console.log(check)
         });
-        if (!check) {
+        if (check) {
             try {
 
                 await setDoc(doc(db, "users", `${user.uid}`), {
@@ -172,7 +176,7 @@ export default function LandingPage() {
     return (
         <div onClick={removeSignUpForm}>
 
-            <div className='w-screen h-screen main ' onClick={removeSignUpForm}>
+            <div className=' main ' onClick={removeSignUpForm}>
                 <div className='navbar border border-black  h-16 opacity-50 flex justify-between  sticky top-0 items-center z-20'>
                     <div className='ml-4 navbarOptions'>
                         <span className=' text-4xl mr-3 cursor-pointer font-bold'>Prof.ex</span>
@@ -225,6 +229,7 @@ export default function LandingPage() {
             </div>
             {currentUser && <Internship></Internship>}
             {/* <div className='h-screen'></div> */}
+            {currentUser && <Footer></Footer>}
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Timer(props) {
-    console.log(props.timer)
     const [timeLeft, setTimeLeft] = useState(props.timer);
     useEffect(() => {
         if (timeLeft === 0) {

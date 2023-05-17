@@ -48,17 +48,30 @@
     font-size: 16px;
     border-radius: 5px;
 }
+.form-label{
+    width: 20vw;
+}
 @media screen and (max-width: 650px) {
     .PointsBeforeYouBegin{
         font-size: 40px;
     }
     #testDetails{
         margin-top: 20px;
+        width: 80vw;
+    }
+    .form-label{
+        width: 35vw;
     }
     #testDetails> button {
         margin-top: 3px;
     }
     .question-box{
         width: 100%;
+    }
+    .resinput{
+        width: 45vw;
+    }
+    .next-button{
+        margin-bottom: 4px;
     }
 }
