@@ -16,7 +16,7 @@ export default function Timer(props) {
 
     return (
         <div id='timercomponent'>
-            {timeLeft && <h2>{parseInt(timeLeft / 60)} <span>:</span> {timeLeft % 60 > 10 ? timeLeft % 60 : `0${timeLeft % 60}`}</h2>}
+            {timeLeft && <h2>{parseInt(timeLeft / 60)} <span>:</span> {timeLeft % 60 >= 10 ? timeLeft % 60 : `0${timeLeft % 60}`}</h2>}
         </div>
     );
 }

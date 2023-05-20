@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import front from '../assets/pictures/internshipPic.png'
 import './Internship.css'
 import '../assets/css/blobz.min.css'
+import './FormApplyForStartup.css'
 import Internbox from './Internbox'
 
 //animation for intern image  and heading
@@ -57,14 +58,7 @@ setTimeout(() => {
     observer.observe(element);
   });
 }, 100);
-function change(e) {
-  console.log(e.target.checked)
-  let t = document.getElementsByClassName('internmain');
-  console.log(t);
-  let l = Array.from(t);
-  console.log(l)
-  l[0].display = 'none'
-}
+
 export default function Internship() {
   // animation for the redirection of the page
   useEffect(() => {
@@ -118,7 +112,22 @@ export default function Internship() {
       observer.observe(element);
     });
   }, [])
-  
+  function change(e) {
+    if (e.target.checked) {
+      console.log(e.target.checked)
+      document.getElementById('internmain').classList.remove('internmain');
+      document.getElementById('internmain').classList.add('hidden');
+      document.getElementById('applyStartup').classList.remove('hidden');
+      
+    }
+    else {
+      console.log(e.target.checked)
+      document.getElementById('internmain').classList.add('internmain');
+      document.getElementById('internmain').classList.remove('hidden');
+      document.getElementById('applyStartup').classList.add('hidden');
+      
+    }
+  }
   return (
     <div id='internship' className='mainI'>
 
@@ -133,10 +142,10 @@ export default function Internship() {
               <label htmlFor="switch-"></label>
             </div>
           </div>
-          <p>Give a intern</p>
+          <p>Register as a Startup</p>
         </div>
       </div>
-      <div className=' ml-10 mr-10 grid gridc internmain justify-items-center'>
+      <div id='internmain' className=' ml-10 mr-10 grid gridc internmain justify-items-center'>
         <Internbox></Internbox>
         <Internbox></Internbox>
         <Internbox></Internbox>
@@ -145,6 +154,63 @@ export default function Internship() {
         <Internbox></Internbox>
         <Internbox></Internbox>
         <Internbox></Internbox>
+      </div>
+      <div id='applyStartup' className='w-5/6 hidden m-auto' >
+        <div className='m-auto'>
+          <form className="formst m-auto">
+            <p className="titlest">Register </p>
+            <p className="messagest">Register now to start hiring...</p>
+            <div className="flexst">
+            <label>
+              <input required placeholder="Firstname" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Lastname" type="text" className="inputst" />
+            </label>
+            </div>
+            <label>
+              <input required placeholder="Email" type="email" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="StartUp Name" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Phone Number" type="" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Position of person Registering" type="text" className="inputst" />
+            </label>
+            <div className="flexst">
+            <label>
+              <input required placeholder="Position for hiring " type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Number of Recuits" type="number" className="inputst" />
+            </label>
+            </div>
+            <label>
+              <input required placeholder="Job Description" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Eligibility Criteria for the role" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Location" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Stipend Info" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Duration" type="text" className="inputst" />
+            </label>
+            <label>
+              <input required placeholder="Additional info" type="text" className="inputst" />
+            </label>
+
+            <button className="submitst">Submit</button>
+          </form>
+        </div>
+
       </div>
     </div>
   )

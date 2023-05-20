@@ -69,7 +69,7 @@ export default function Test() {
         }
         console.log(timer)
         window.scrollTo({
-            top: document.getElementById("question-list").offsetTop - 2,
+            top: document.getElementById("question-list").offsetTop - 10,
             left: 0,
             behavior: 'smooth'
         });
