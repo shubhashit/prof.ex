@@ -241,7 +241,10 @@
 }
 
 @media screen and (max-width: 800px) {
-    #internship>div {
+    #applyStartup{
+        width: 90%;
+    }
+    #internship>div:first-child {
         margin: 0;
     }
 
@@ -255,7 +258,10 @@
 }
 
 @media screen and (max-width: 550px) {
-    #internship>div {
+    #applyStartup {
+            width: 95%;
+        }
+    #internship>div:first-child {
         margin: 0;
         flex-direction: column;
     }

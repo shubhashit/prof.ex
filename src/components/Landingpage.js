@@ -185,7 +185,7 @@ export default function LandingPage() {
                     {/* <input type="text" name="text" className="input" placeholder="Type something here...."></input> */}
                     <div className="flex flex-col mr-2">
                         <button onClick={signout}>
-                            {currentUser && <i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i>}
+                            {currentUser && <i className="fa-solid fa-arrow-right-from-bracket fa-xl"></i>}
                         </button>
                         <span>
                             {currentUser && `${currentUser.displayName}`}
