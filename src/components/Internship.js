@@ -4,6 +4,8 @@ import './Internship.css'
 import '../assets/css/blobz.min.css'
 import './FormApplyForStartup.css'
 import Internbox from './Internbox'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../backend/firebase'
 
 //animation for intern image  and heading
 setTimeout(() => {
@@ -128,6 +130,32 @@ export default function Internship() {
       
     }
   }
+  async function Startupformhandlesubmit(e){
+    e.preventDefault();
+    console.log('submit');
+    console.log(e.target[0].value);
+    try {
+      await addDoc(collection(db, "StartUps"), {
+        Firstname : e.target[0].value,
+        Lastname : e.target[1].value,
+        Email: e.target[2].value,
+        StartUpName: e.target[3].value,
+        PhoneNumber: e.target[4].value,
+        PositionOfPersonRegistering: e.target[5].value,
+        PositionForHirinng: e.target[6].value,
+        NumberOfRecuits: e.target[7].value,
+        JobDescription: e.target[8].value,
+        EligibilityCriteriaForTheRole: e.target[9].value,
+        Location: e.target[10].value,
+        StipendInfo: e.target[11].value,
+        Duration: e.target[12].value,
+        AdditionalInfo: e.target[13].value,
+      });
+      console.log('in try block')
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
   return (
     <div id='internship' className='mainI'>
 
@@ -157,54 +185,54 @@ export default function Internship() {
       </div>
       <div id='applyStartup' className='w-5/6 hidden m-auto' >
         <div className='m-auto'>
-          <form className="formst m-auto">
+          <form className="formst m-auto" onSubmit={Startupformhandlesubmit}>
             <p className="titlest">Register </p>
             <p className="messagest">Register now to start hiring...</p>
             <div className="flexst">
             <label>
-              <input required placeholder="Firstname" type="text" className="inputst" />
+              <input required='' placeholder="Firstname" type="text" className="inputst placeholder:align-middle placeholder:justify-center" />
             </label>
             <label>
-              <input required placeholder="Lastname" type="text" className="inputst" />
+              <input required='' placeholder="Lastname" type="text" className="inputst" />
             </label>
             </div>
             <label>
-              <input required placeholder="Email" type="email" className="inputst" />
+              <input required='' placeholder="Email" type="email" className="inputst" />
             </label>
             <label>
-              <input required placeholder="StartUp Name" type="text" className="inputst" />
+              <input required='' placeholder="StartUp Name" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Phone Number" type="" className="inputst" />
+              <input required='' placeholder="Phone Number" type="" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Position of person Registering" type="text" className="inputst" />
+              <input required='' placeholder="Position of person Registering" type="text" className="inputst" />
             </label>
             <div className="flexst">
             <label>
-              <input required placeholder="Position for hiring " type="text" className="inputst" />
+              <input required='' placeholder="Position for hiring " type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Number of Recuits" type="number" className="inputst" />
+              <input required='' placeholder="Number of Recuits" type="number" className="inputst" />
             </label>
             </div>
             <label>
-              <input required placeholder="Job Description" type="text" className="inputst" />
+              <input required='' placeholder="Job Description" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Eligibility Criteria for the role" type="text" className="inputst" />
+              <input required='' placeholder="Eligibility Criteria for the role" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Location" type="text" className="inputst" />
+              <input required='' placeholder="Location" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Stipend Info" type="text" className="inputst" />
+              <input required='' placeholder="Stipend Info" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Duration" type="text" className="inputst" />
+              <input required='' placeholder="Duration" type="text" className="inputst" />
             </label>
             <label>
-              <input required placeholder="Additional info" type="text" className="inputst" />
+              <input required='' placeholder="Additional info" type="text" className="inputst" />
             </label>
 
             <button className="submitst">Submit</button>

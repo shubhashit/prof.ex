@@ -1,15 +1,25 @@
 import React from 'react'
 import './Landingpage.css'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { db } from '../backend/firebase';
 
 export default function Footer() {
-  function feedbackSubmit(e){
+  async function feedbackSubmit(e){
     e.preventDefault();
-    console.log('feedback');
+    try {
+      await addDoc(collection(db, "Feedback"), {
+        email : e.target[0].value,
+        message : e.target[1].value,
+      });
+      console.log('in try block')
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   }
   return (
     <div className='h-10 mainI text-white pt-4'>
       <div className=' flex w-full'>
-        <div className='w-1/2   border-r-black border-r p-6 flex flex-col items-start' >
+        <div className='w-1/2   border-r-black border-r-4 p-6 flex flex-col items-start' >
           <span className='font-bold text-2xl'>
             CONTACT US
           </span>
