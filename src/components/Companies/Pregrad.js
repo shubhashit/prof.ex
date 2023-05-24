@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { companies } from '../../constants'
 import front from '../../assets/pictures/front.png'
 
 
 export default function Pregrad() {
-  const Company = companies[0];
+  console.log(companies)
+  const [company , setcompany ] = useState({'---':'---'});
+  const [discription , setdiscription] = useState();
+  useEffect(()=>{
+    setcompany(companies[0]);
+  },[])
   const renderItems = () => {
     const renderedItems = [];
 
-    Company.JobDiscrption.forEach((item, index) => {
+    companies[0].JobDiscrption.forEach((item, index) => {
       renderedItems.push(<div key={index}>{`${index+1}. ${item}`}</div>);
     });
 
@@ -19,14 +24,18 @@ export default function Pregrad() {
   function NavigateToTestPage() {
     navigate('/internship/companyname/test')
   }
-  console.log(Company)
+  console.log(company)
+  console.log(Object.keys(company)[1]);
+
+  
   return (
     <div className='w-screen h-screen main'>
       <div id='company' className='flex justify-evenly pt-20 ' >
         <div className='m-10 text-white p-2 flex flex-col justify-center items-center z-30'>
-          <p className='text-4xl font-bold mb-3'>{Company.CompanyName}</p>
+          <p className='text-4xl font-bold mb-3'>{company && company.CompanyName}</p>
           <p className='text-xl'>
-            {Object.keys(Company[1])}
+            {/* {company ? `${Object.keys()}`:`hellow`} */}
+            {Object.keys(company)[1]}
             {renderItems()}
           </p>
           <button className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
