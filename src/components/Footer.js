@@ -1,6 +1,6 @@
 import React from 'react'
 import './Landingpage.css'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../backend/firebase';
 
 export default function Footer() {

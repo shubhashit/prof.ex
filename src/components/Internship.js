@@ -174,7 +174,7 @@ export default function Internship() {
         </div>
       </div>
       <div id='internmain' className=' ml-10 mr-10 grid gridc internmain justify-items-center'>
-        <Internbox></Internbox>
+        <Internbox company = "Pregrad"></Internbox>
         <Internbox></Internbox>
         <Internbox></Internbox>
         <Internbox></Internbox>
