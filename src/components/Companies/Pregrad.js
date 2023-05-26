@@ -7,19 +7,18 @@ import front from '../../assets/pictures/front.png'
 export default function Pregrad() {
   console.log(companies)
   const [company , setcompany ] = useState({'---':'---'});
-  const [discription , setdiscription] = useState();
   useEffect(()=>{
     setcompany(companies[0]);
   },[])
-  const renderItems = () => {
-    const renderedItems = [];
+  // const renderItems = () => {
+  //   const renderedItems = [];
 
-    companies[0].JobDiscrption.forEach((item, index) => {
-      renderedItems.push(<div key={index}>{`${index+1}. ${item}`}</div>);
-    });
+  //   companies[0].JobDiscrption.forEach((item, index) => {
+  //     renderedItems.push(<div key={index}>{`${index+1}. ${item}`}</div>);
+  //   });
 
-    return renderedItems;
-  };
+  //   return renderedItems;
+  // };
   const navigate = useNavigate()
   function NavigateToTestPage() {
     navigate('/internship/companyname/test')
@@ -35,8 +34,10 @@ export default function Pregrad() {
           <p className='text-4xl font-bold mb-3'>{company && company.CompanyName}</p>
           <p className='text-xl'>
             {/* {company ? `${Object.keys()}`:`hellow`} */}
-            {Object.keys(company)[1]}
-            {renderItems()}
+            {/* {Object.keys(company)[2]} */}
+            <br />
+            {company.about}
+            {/* {renderItems()} */}
           </p>
           <button className='m-4 p-1 pl-2 pr-2 get-started-btn cursor-pointer' onClick={NavigateToTestPage} >TAKE TEST</button>
         </div>
