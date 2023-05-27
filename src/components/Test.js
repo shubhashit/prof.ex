@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 import './Test.css'
 import img from '../assets/pictures/online-test2.png'
 import Question from "./Question.1.js"
@@ -7,12 +8,13 @@ import Timer from './Timer'
 import { AuthContext } from '../context/AuthContext'
 import { Timestamp, addDoc, collection, doc, getDoc } from 'firebase/firestore'
 import { db } from '../backend/firebase';
-import { getDocs, query } from 'firebase/firestore';
 export default function Test() {
     const { currentUser } = useContext(AuthContext);
     const [questiondoc, setQuestiondoc] = useState([]);
     const [timer, setTimer] = useState(false)
     const [resume, setresume] = useState(null);
+    // Initialize Firebase Storage
+    const storage = getStorage();
     useEffect(() => {
         async function fetchdata() {
             const ref = doc(db, "Company", "Test Company");
@@ -51,6 +53,7 @@ export default function Test() {
     async function onSubmit(e) {
         e.preventDefault();
         let email = e.target[1].value;
+        let pdfFile = e.target[3].value;
         if (email === currentUser.email  && resume != null) {
             console.log(currentUser.uid)
             try {
@@ -63,6 +66,19 @@ export default function Test() {
                 document.getElementById('question-list').classList.remove('hidden');
                 document.getElementById('start-test').disabled = true;
                 setTimer(true)
+
+                
+                // Create a storage reference
+                const storageRef = ref(storage, `Resume/${email}`);
+                // Upload the PDF file
+                uploadBytes(storageRef, pdfFile)
+                    .then((snapshot) => {
+                        console.log('PDF file uploaded successfully.');
+                    })
+                    .catch((error) => {
+                        console.error('Error uploading PDF file:', error);
+                    });
+
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
