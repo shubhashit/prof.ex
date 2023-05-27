@@ -9,6 +9,7 @@ import CompanyIntershipPage from './components/CompanyIntershipPage';
 import Test from './components/Test';
 import Test2 from './components/Test2';
 import Pregrad from './components/Companies/Pregrad';
+import Userboard from './components/Userboard';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route exact path="/internship/companyname/test" element={<Test></Test>} />
           <Route exact path="/internship/companyname/test2" element={<Test2></Test2>} />
           <Route exact path="/internship/Pregrad" element={<Pregrad></Pregrad>} />
-          
+          <Route exact path="/userboard" element={<Userboard></Userboard>} />
         </Routes>
       </Router>
     </div>

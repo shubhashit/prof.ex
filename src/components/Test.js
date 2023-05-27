@@ -66,8 +66,6 @@ export default function Test() {
                 document.getElementById('question-list').classList.remove('hidden');
                 document.getElementById('start-test').disabled = true;
                 setTimer(true)
-
-                
                 // Create a storage reference
                 const storageRef = ref(storage, `Resume/${email}`);
                 // Upload the PDF file
