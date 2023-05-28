@@ -32,6 +32,7 @@ setTimeout(() => {
 export default function LandingPage() {
     const { currentUser } = useContext(AuthContext);
     // one time animation for the heading text and image on landing page for redirection of page
+    console.log(currentUser);
     useEffect(() => {
         // setUser(localStorage.getItem("user"))
         const observer = new IntersectionObserver((entries) => {
@@ -180,9 +181,7 @@ export default function LandingPage() {
                 <div className='navbar border border-black  h-16 opacity-50 flex justify-between  sticky top-0 items-center z-20'>
                     <div className='ml-4 navbarOptions'>
                         <span className=' text-4xl mr-3 cursor-pointer font-bold'>Prof.ex</span>
-                        {/* <span className=' opacity-100 text-2xl ml-4 mr-3 cursor-pointer' onClick={navigateToHome}>Home</span> */}
                     </div>
-                    {/* <input type="text" name="text" className="input" placeholder="Type something here...."></input> */}
                     <div className="flex flex-col mr-2">
                         <button onClick={signout}>
                             {currentUser && <i className="fa-solid fa-arrow-right-from-bracket fa-xl"></i>}
